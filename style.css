@@ -20,8 +20,8 @@ body{
     box-sizing: border-box;
     margin:auto;
     padding:20px;
-    height:220px;
-    width:60vw;
+    min-height:220px;
+    width:70vw;
     border-radius: 5px;
     box-shadow: 0 10px 10px 10px rgba(0,0,0,0.2);
 }
@@ -68,8 +68,8 @@ button{
     box-sizing: border-box;
     padding:40px 0 0 0;
     margin:auto;
-    width:60vw;
-    height:100px;
+    width:50vw;
+    min-height:100px;
 }
 
 @media only screen and (max-width: 800px) {

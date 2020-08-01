@@ -6,12 +6,12 @@ const myFunc = ()=>{
         return a.json();
     })
     .then(a=>{
-        // if(a.quoteText.split(' ').length>14){
-        //     document.querySelector('#the_quote').style.fontSize = 14
-        // }else{
-        //     document.querySelector('#the_quote').style.fontSize = 20
-        //     console.log(a.quoteText.split(' ').length)
-        // }
+        if(a.quoteText.split(' ').length>14){
+            document.querySelector('#the_quote').style.fontSize = 14
+        }else{
+            document.querySelector('#the_quote').style.fontSize = 20
+            console.log(a.quoteText.split(' ').length)
+        }
         console.log(a.quoteText);
         if(quote === a.quoteText){
             myFunc();
@@ -35,11 +35,11 @@ document.getElementById('new_quote').addEventListener('click',()=>{
 
 const generate_text=(quote, author)=>{
     if(quote === ''){
-        document.getElementById('the_quote').innerHTML = `<p>${quote}</p>`
-        document.getElementById('the_author').innerHTML = `<p><i>unknown</i></p>`
+        document.getElementById('the_quote').textContent = `${quote}`
+        document.getElementById('the_author').textContent = `unknown`
     }else{
-        document.getElementById('the_quote').innerHTML = `<p>${quote}</p>`
-        document.getElementById('the_author').innerHTML = `<p><i>${author}</i></p>`
+        document.getElementById('the_quote').textContent = `${quote}`
+        document.getElementById('the_author').textContent = `${author}`
     }
 }
 
