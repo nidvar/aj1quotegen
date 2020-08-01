@@ -1,13 +1,25 @@
+let quote=''
+
 const myFunc = ()=>{
     fetch('https://mysterious-basin-66083.herokuapp.com/http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json')
     .then(a=>{
         return a.json();
     })
     .then(a=>{
-        console.log(a.quoteAuthor)
-        console.log(a.quoteText)
-        console.log(a.quoteAuthor)
-        display_quote(a.quoteText,a.quoteAuthor)
+        // if(a.quoteText.split(' ').length>14){
+        //     document.querySelector('#the_quote').style.fontSize = 14
+        // }else{
+        //     document.querySelector('#the_quote').style.fontSize = 20
+        //     console.log(a.quoteText.split(' ').length)
+        // }
+        console.log(a.quoteText);
+        if(quote === a.quoteText){
+            myFunc();
+            console.log('SAME TEXT. REDO !')
+            return
+        }
+        quote = a.quoteText;
+        generate_text(a.quoteText, a.quoteAuthor)
     })
     .catch(err=>{
         myFunc();
@@ -17,13 +29,22 @@ const myFunc = ()=>{
 
 myFunc();
 
-const display_quote=(quote, author)=>{
-    const p = document.createElement('p');
-    p.innerHTML = `<p>${quote}</p><br /><p><i>${author}</i></p>`
-    document.getElementById('output').appendChild(p)
+document.getElementById('new_quote').addEventListener('click',()=>{
+    myFunc();
+})
+
+const generate_text=(quote, author)=>{
+    if(quote === ''){
+        document.getElementById('the_quote').innerHTML = `<p>${quote}</p>`
+        document.getElementById('the_author').innerHTML = `<p><i>unknown</i></p>`
+    }else{
+        document.getElementById('the_quote').innerHTML = `<p>${quote}</p>`
+        document.getElementById('the_author').innerHTML = `<p><i>${author}</i></p>`
+    }
 }
 
-document.getElementById('new_quote').addEventListener('click',()=>{
-    document.getElementById('output').textContent = '';
-    myFunc();
+document.getElementById('twitter_img').addEventListener('click',()=>{
+    const quote = document.getElementById('the_quote').textContent
+    const author = document.getElementById('the_author').textContent
+    window.open(`https://twitter.com/intent/tweet?text=${quote} - ${author}`, '_blank');
 })
